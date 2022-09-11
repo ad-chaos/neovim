@@ -288,7 +288,8 @@ int main(int argc, char **argv)
   // Recovery mode without a file name: List swap files.
   // In this case, no UI is needed.
   if (recoverymode && fname == NULL) {
-    headless_mode = true;
+    recover_names(NULL, true, 0, NULL);
+    os_exit(0);
   }
 
   TIME_MSG("expanding arguments");
@@ -409,13 +410,6 @@ int main(int argc, char **argv)
 
   // Decide about window layout for diff mode after reading vimrc.
   set_window_layout(&params);
-
-  // Recovery mode without a file name: List swap files.
-  // Uses the 'dir' option, therefore it must be after the initializations.
-  if (recoverymode && fname == NULL) {
-    recover_names(NULL, true, 0, NULL);
-    os_exit(0);
-  }
 
   // Set some option defaults after reading vimrc files.
   set_init_3();
